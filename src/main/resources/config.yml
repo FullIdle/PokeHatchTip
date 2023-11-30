@@ -1,0 +1,17 @@
+#papi内可以自定义变量自定义的变量是json格式的可以自己用指令看看pokemon的json格式按照格式的地址来自定义
+#支持PlaceholderAPI变量,papi内自定义的变量是用{}包裹,不过component不能再用,因为已经被占用了!
+#tip内必须有一个且只能有一个{component}
+tip: '&e%player_name% 孵化出了 {component}'
+component:
+  display: '&b&l{pokename}'
+  hover:
+    - '&e宝可梦: &a{pokename}'
+    - '&e个体:'
+    - '  &e攻击力: &a{ivhp}'
+
+#如果你要json的数据套壳内的数据则没有办法,不过几乎不用,因为套壳内几乎没有需要用到的数据
+#以下数据是1.12.2的宝可梦数据,1.16.5请自己摸索哦!
+#获取值内有些奇怪的字符,不过那些我觉得不影响,除非很多人想要去掉
+papi:
+  pokename: 'Name'
+  ivhp: 'IVHP'

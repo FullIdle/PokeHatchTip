@@ -1,0 +1,18 @@
+group = rootProject.group
+version = rootProject.version
+
+dependencies {
+}
+
+test {
+    useJUnitPlatform()
+}
+
+tasks.withType(JavaCompile){
+    options.encoding = "UTF-8"
+}
+
+processResources {
+    setFilteringCharset("UTF-8")
+    expand project.properties
+}

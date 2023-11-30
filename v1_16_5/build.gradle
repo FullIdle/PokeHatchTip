@@ -1,0 +1,27 @@
+apply plugin: 'net.minecraftforge.gradle'
+
+group = rootProject.group
+version = rootProject.version
+
+minecraft {
+    mappings channel: 'official', version: '1.16.5'
+}
+
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.16.5-36.2.39'
+    compileOnly 'com.pixelmonmod.pixelmon:Pixelmon:1.16.5-9.1.9'
+    implementation project(':common')
+}
+
+test {
+    useJUnitPlatform()
+}
+
+tasks.withType(JavaCompile){
+    options.encoding = "UTF-8"
+}
+
+processResources {
+    setFilteringCharset("UTF-8")
+    expand project.properties
+}

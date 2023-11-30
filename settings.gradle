@@ -1,0 +1,2 @@
+rootProject.name = 'PokeHatchTip'
+include('v1_12_2', 'common', 'v1_16_5')
