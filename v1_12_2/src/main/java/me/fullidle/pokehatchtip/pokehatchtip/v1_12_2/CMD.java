@@ -21,4 +21,12 @@ public class CMD implements CommandExecutor {
         sender.sendMessage("§3以上是一只Abomasnow的Json数据,请按照格式去配置config.yml");
         return false;
     }
+
+    public void test(){
+
+    }
+
+    public void test2(){
+
+    }
 }
