@@ -35,27 +35,13 @@ allprojects {
 
 dependencies {
     implementation project(path: ':common')
-
-    implementation fileTree(dir: 'v1_12_2/build/libs', include: '**/v1_12_2'+'-'+version+'.jar')
-    implementation fileTree(dir: 'v1_16_5/build/libs', include: '**/v1_16_5'+'-'+version+'.jar')
+    implementation project(':v1_12_2').sourceSets.main.output
+    implementation project(':v1_16_5').sourceSets.main.output
 
     compileOnly fileTree(dir: 'v1_12_2/src/main/java', include: '**/*.java')
     compileOnly fileTree(dir: 'v1_16_5/src/main/java', include: '**/*.java')
 }
-
-test {
-    useJUnitPlatform()
-}
-
-tasks.withType(JavaCompile){
-    options.encoding = "UTF-8"
-}
-
-processResources {
-    setFilteringCharset("UTF-8")
-    expand project.properties
-}
-
+//build
 jar {
     from project(':v1_12_2').sourceSets.main.output
     from project(':v1_12_2').sourceSets.main.resources
@@ -68,3 +54,17 @@ jar {
 project(":v1_12_2").evaluationDependsOnChildren()
 project(":v1_12_2").evaluationDependsOnChildren()
 compileJava.dependsOn(':v1_12_2:build', ':v1_16_5:build')
+
+//===============
+test {
+    useJUnitPlatform()
+}
+
+tasks.withType(JavaCompile){
+    options.encoding = "UTF-8"
+}
+
+processResources {
+    setFilteringCharset("UTF-8")
+    expand project.properties
+}
