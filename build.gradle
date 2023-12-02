@@ -52,7 +52,7 @@ jar {
 }
 
 project(":v1_12_2").evaluationDependsOnChildren()
-project(":v1_12_2").evaluationDependsOnChildren()
+project(":v1_16_5").evaluationDependsOnChildren()
 compileJava.dependsOn(':v1_12_2:build', ':v1_16_5:build')
 
 //===============
