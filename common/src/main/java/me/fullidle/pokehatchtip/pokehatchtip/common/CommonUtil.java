@@ -5,6 +5,7 @@ import me.clip.placeholderapi.PlaceholderAPI;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.Map;
@@ -12,7 +13,11 @@ import java.util.Map;
 import static me.fullidle.pokehatchtip.pokehatchtip.common.Data.*;
 
 public class CommonUtil {
-    public static void sendEggMessage(Player player,String json) {
+    public static void broadcastEggMessage(BaseComponent[] components){
+        Bukkit.spigot().broadcast(components);
+    }
+    /*json是宝可梦的json数据*/
+    public static BaseComponent[] getFormatComponent(Player player,String json) {
         JsonObject object = gson.fromJson(json, JsonObject.class);
         String str = "{component}";
         int l = tip.indexOf(str);
@@ -30,8 +35,7 @@ public class CommonUtil {
 
         hoverC.event(new HoverEvent(HoverEvent.Action.SHOW_TEXT,new ComponentBuilder(stringBuilder.toString()).create()));
 
-        BaseComponent[] components = start.append(hoverC.create()).append(end.create()).create();
-        player.spigot().sendMessage(components);
+        return start.append(hoverC.create()).append(end.create()).create();
     }
 
     public static String replacePapi(String s,Player player,JsonObject jsonObject){
@@ -39,7 +43,6 @@ public class CommonUtil {
                 .replace("&", "§");
         for (Map.Entry<String, String> entry : papi.entrySet()) {
             String cs = "{" + entry.getKey() + "}";
-            System.out.println(entry.getKey());
             s = s.replace(cs,jsonObject.get(entry.getValue()).getAsString());
         }
         return s;

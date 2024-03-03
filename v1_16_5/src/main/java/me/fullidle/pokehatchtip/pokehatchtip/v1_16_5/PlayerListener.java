@@ -22,6 +22,6 @@ public class PlayerListener implements Listener {
         Pokemon pokemon = e.getPokemon();
         Player player = Bukkit.getPlayer(spe.getUUID());
         String json = pokemon.writeToNBT(new CompoundNBT()).toString();
-        CommonUtil.sendEggMessage(player, json);
+        CommonUtil.broadcastEggMessage(CommonUtil.getFormatComponent(player, json));
     }
 }
