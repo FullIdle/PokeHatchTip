@@ -16,12 +16,7 @@ public class CMD implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (sender instanceof Player) return false;
         plugin.reloadConfig();
-        Species abomasnow = PixelmonSpecies.ABOMASNOW.getValueUnsafe();
-        CompoundNBT nbt = PokemonFactory.create(abomasnow).writeToNBT(new CompoundNBT());
-        String json = nbt.toString();
-        sender.sendMessage(json);
-        sender.sendMessage("§3以上是一只Abomasnow的Json数据,请按照格式去配置config.yml");
-        sender.sendMessage("§aconfig.yml已重载");
+        sender.sendMessage("RELOADED!");
         return false;
     }
 }

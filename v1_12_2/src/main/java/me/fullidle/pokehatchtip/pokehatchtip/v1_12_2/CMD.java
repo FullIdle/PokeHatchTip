@@ -15,18 +15,7 @@ public class CMD implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (sender instanceof Player) return false;
         plugin.reloadConfig();
-        NBTTagCompound nbt = Pixelmon.pokemonFactory.create(EnumSpecies.Abomasnow).writeToNBT(new NBTTagCompound());
-        String json = nbt.toString();
-        sender.sendMessage(json);
-        sender.sendMessage("§3以上是一只Abomasnow的Json数据,请按照格式去配置config.yml");
+        sender.sendMessage("RELOADED!");
         return false;
-    }
-
-    public void test(){
-
-    }
-
-    public void test2(){
-
     }
 }

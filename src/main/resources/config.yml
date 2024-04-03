@@ -1,23 +1,27 @@
-#papi内可以自定义变量自定义的变量是json格式的可以自己用指令看看pokemon的json格式按照格式的地址来自定义
-#支持PlaceholderAPI变量,papi内自定义的变量是用{}包裹,不过component不能再用,因为已经被占用了!
 #tip内必须有一个且只能有一个{component}
+#{pokemon}则由插件进行替换
+#这里用的主要是pctools变量
 tip: '&e%player_name% 孵化出了 {component}'
 component:
-  display: '&b&l{pokename}'
+  display: '&b&l%pctools_{pokemon}_localizedname%'
   hover:
-    - '&e宝可梦: &a{pokename}'
-    - '&e个体:'
-    - '  &e生命: &a{ivhp}'
-
-## 用指令获取一个基础实体的nbt数据，这数据会显示再后台
-# ,可以全部复制然后粘贴到一个在线json格式化网站上，让他格式化
-# 不然你有可能看不懂
-
-##一下配置更具上面的说法搞到json数据后
-# 自行配置
-# 配置格式如下{中括号不需要带}
-# [自定义的变量名]: '[再Json中的第一层数据索引名]'
-papi:
-  pokename: 'Name'
-  ivhp: 'IVHP'
-#配置好后如自定义变量名是ivhp,那么在最上面的配置信息的时候{ivhp}就是变量了
+    - "&b▣ 基本信息"
+    - "&3属性: &7%pctools_{pokemon}_types% &f| &3蛋组: &7%pctools_{pokemon}_egggroup%"
+    - "&3性格: &7%pctools_{pokemon}_nature% &f| &3特性: &7%pctools_{pokemon}_ability%"
+    - "&3性别: &7%pctools_{pokemon}_gender% &f| &3道具: &7%pctools_{pokemon}_helditem%"
+    - "&3闪光: &7%pctools_{pokemon}_shiny% &f| &3形态: &7%pctools_{pokemon}_form_localizedname%"
+    - "&3体型: &7%pctools_{pokemon}_growth% &f| &3球种: &7%pctools_{pokemon}_caughtball%"
+    - "&b▣ 种族信息&7 (总和：%pctools_{pokemon}_basetotal%)"
+    - "&3血量: &7%pctools_{pokemon}_basestats_hp% &f| &3攻击: &7%pctools_{pokemon}_basestats_at% &f| &3防御: &7%pctools_{pokemon}_basestats_df%"
+    - "&3特攻: &7%pctools_{pokemon}_basestats_sa% &f| &3特防: &7%pctools_{pokemon}_basestats_sd% &f| &3速度: &7%pctools_{pokemon}_basestats_sp%"
+    - "&b▣ 个体信息&7 (%pctools_{pokemon}_ivstotal%/186)"
+    - "&3血量: &7%pctools_{pokemon}_ivs_hp% &f| &3攻击: &7%pctools_{pokemon}_ivs_at% &f| &3防御: &7%pctools_{pokemon}_ivs_df%"
+    - "&3特攻: &7%pctools_{pokemon}_ivs_sa% &f| &3特防: &7%pctools_{pokemon}_ivs_sd% &f| &3速度: &7%pctools_{pokemon}_ivs_sp%"
+    - "&b▣ 努力信息&7 (%pctools_{pokemon}_evstotal%/510)"
+    - "&3血量: &7%pctools_{pokemon}_evs_hp% &f| &3攻击: &7%pctools_{pokemon}_evs_at% &f| &3防御: &7%pctools_{pokemon}_evs_df%"
+    - "&3特攻: &7%pctools_{pokemon}_evs_sa% &f| &3特防: &7%pctools_{pokemon}_evs_sd% &f| &3速度: &7%pctools_{pokemon}_evs_sp%"
+    - "&b▣ 能力信息&7 (总和：%pctools_{pokemon}_statstotal%)"
+    - "&3血量: &7%pctools_{pokemon}_stats_hp% &f| &3攻击: &7%pctools_{pokemon}_stats_at% &f| &3防御: &7%pctools_{pokemon}_stats_df%"
+    - "&3特攻: &7%pctools_{pokemon}_stats_sa% &f| &3特防: &7%pctools_{pokemon}_stats_sd% &f| &3速度: &7%pctools_{pokemon}_stats_sp%"
+    - "&b▣ 技能信息"
+    - "&3技能: &7%pctools_{pokemon}_moveset_0% &f| &7%pctools_{pokemon}_moveset_1% &f| &7%pctools_{pokemon}_moveset_2% &f| &7%pctools_{pokemon}_moveset_3% "
