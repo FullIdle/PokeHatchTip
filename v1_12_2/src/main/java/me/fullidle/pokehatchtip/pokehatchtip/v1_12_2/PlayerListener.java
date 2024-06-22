@@ -20,7 +20,7 @@ public class PlayerListener implements Listener {
         EggHatchEvent e = (EggHatchEvent) event.getForgeEvent();
         EntityPlayerMP mp = e.getPlayer();
         Pokemon pokemon = e.getPokemon();
-        Player player = Bukkit.getPlayer(mp.getUniqueID());
+        Player player = Bukkit.getPlayer(mp.func_110124_au());
         String nbt = pokemon.writeToNBT(new NBTTagCompound()).toString();
         CommonUtil.broadcastEggMessage(CommonUtil.getFormatComponent(player, nbt));
     }

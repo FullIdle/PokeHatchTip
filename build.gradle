@@ -1,11 +1,6 @@
-buildscript {
-    repositories {
-        jcenter()
-        maven { url = "https://files.minecraftforge.net/maven" }
-    }
-    dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:3.+'
-    }
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
 group = 'me.fullidle.pokehatchtip.pokehatchtip.Main'
@@ -13,7 +8,11 @@ version = '1.1-SNAPSHOT'
 
 allprojects {
     apply plugin: 'java'
-
+    java{
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+    
     repositories {
         mavenCentral()
         mavenLocal()
@@ -21,49 +20,49 @@ allprojects {
         maven {url = 'https://repo.extendedclip.com/content/repositories/placeholderapi/'}
     }
     dependencies {
-        compileOnly 'org.spigotmc:spigot:1.16.5-R0.1-SNAPSHOT'
-        compileOnly 'org.spigotmc:spigot-api:1.16.5-R0.1-SNAPSHOT'
         compileOnly 'me.clip:placeholderapi:2.11.5'
-        compileOnly 'me.fullidle.ficore:FICore:1.2.1'
+        compileOnly 'me.fullidle.ficore:FICore:1.2.6'
         testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.1'
         testImplementation 'org.junit.jupiter:junit-jupiter-params:5.9.1'
         testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.1'
         compileOnly 'org.projectlombok:lombok:1.18.28'
         annotationProcessor 'org.projectlombok:lombok:1.18.28'
     }
+    
+    test {
+        useJUnitPlatform()
+    }
+
+    tasks.withType(JavaCompile){
+        options.encoding = "UTF-8"
+    }
+
+    processResources {
+        setFilteringCharset("UTF-8")
+        expand project.properties
+    }
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+    maven {url 'https://raw.github.com/FullIdle/maven-repository/main/'}
 }
 
 dependencies {
+    compileOnly 'org.spigotmc:spigot:1.16.5-R0.1-SNAPSHOT'
+    compileOnly 'org.spigotmc:spigot-api:1.16.5-R0.1-SNAPSHOT'
+
     implementation project(path: ':common')
-    implementation project(':v1_12_2').sourceSets.main.output
-    implementation project(':v1_16_5').sourceSets.main.output
-
-    compileOnly fileTree(dir: 'v1_12_2/src/main/java', include: '**/*.java')
-    compileOnly fileTree(dir: 'v1_16_5/src/main/java', include: '**/*.java')
-}
-//build
-jar {
-    from project(':v1_12_2').sourceSets.main.output
-    from project(':v1_12_2').sourceSets.main.resources
-    from project(':common').sourceSets.main.output
-    from project(':common').sourceSets.main.resources
-    from project(':v1_16_5').sourceSets.main.output
-    from project(':v1_16_5').sourceSets.main.resources
-}
-project(":v1_12_2").evaluationDependsOnChildren()
-project(":v1_16_5").evaluationDependsOnChildren()
-compileJava.dependsOn(':v1_12_2:build', ':v1_16_5:build')
-
-//===============
-test {
-    useJUnitPlatform()
+    implementation project(path: ':v1_12_2')
+    implementation project(path: ':v1_16_5')
 }
 
-tasks.withType(JavaCompile){
-    options.encoding = "UTF-8"
-}
-
-processResources {
-    setFilteringCharset("UTF-8")
-    expand project.properties
+shadowJar {
+    mergeServiceFiles()
+    archiveBaseName.set(this.rootProject.name)
+    archiveVersion.set(this.version)
+    manifest {
+        attributes 'Main-Class': this.group
+    }
 }

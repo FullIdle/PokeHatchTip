@@ -1,8 +1,5 @@
 package me.fullidle.pokehatchtip.pokehatchtip.v1_12_2;
 
-import com.pixelmonmod.pixelmon.Pixelmon;
-import com.pixelmonmod.pixelmon.enums.EnumSpecies;
-import net.minecraft.nbt.NBTTagCompound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
