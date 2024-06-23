@@ -10,7 +10,10 @@ import static me.fullidle.pokehatchtip.pokehatchtip.common.Data.plugin;
 public class CMD implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if (sender instanceof Player) return false;
+        if (!sender.isOp()) {
+            sender.sendMessage("You do not have permission!");
+            return false;
+        }
         plugin.reloadConfig();
         sender.sendMessage("RELOADED!");
         return false;
